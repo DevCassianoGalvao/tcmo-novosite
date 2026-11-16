@@ -103,8 +103,6 @@ h1,h2,h3{margin:0;font-weight:inherit}
 /* ---------- HERO ---------- */
 .hero{position:relative;min-height:100svh;padding:calc(var(--nav-h) + clamp(24px,5vw,64px)) 0 0;display:flex;flex-direction:column;background:radial-gradient(1200px 700px at 78% 30%,#14264A 0%,rgba(20,38,74,0) 60%),radial-gradient(800px 600px at 0% 100%,#0E1C36 0%,rgba(14,28,54,0) 70%),var(--night);overflow:hidden;isolation:isolate}
 .hero__mark{position:absolute;z-index:-1;width:min(1100px,110vw);aspect-ratio:1;left:-22%;top:-18%;background:var(--champ);opacity:.035;-webkit-mask:url(../brand/logo-symbol.svg) center/contain no-repeat;mask:url(../brand/logo-symbol.svg) center/contain no-repeat;pointer-events:none}
-.hero__glow{position:absolute;z-index:-1;left:0;top:0;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;background:radial-gradient(circle,rgba(217,198,161,.13) 0%,rgba(217,198,161,0) 62%);pointer-events:none;opacity:0;transition:opacity .6s}
-.hero:hover .hero__glow{opacity:1}
 .hero__grid{flex:1;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(32px,6vw,96px);padding-bottom:clamp(48px,7vw,96px)}
 .hero__place{color:var(--champ);font-size:15px;letter-spacing:.04em;margin-bottom:28px;display:flex;align-items:center;gap:14px}
 .hero__place::before{content:"";width:36px;height:1px;background:var(--champ)}
@@ -374,9 +372,7 @@ h1,h2,h3{margin:0;font-weight:inherit}
 }
 @media (max-width:900px){
   :root{--nav-h:72px}
-  .hero__glow{position:absolute;z-index:-1;left:0;top:0;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;background:radial-gradient(circle,rgba(217,198,161,.13) 0%,rgba(217,198,161,0) 62%);pointer-events:none;opacity:0;transition:opacity .6s}
-.hero:hover .hero__glow{opacity:1}
-.hero__grid{grid-template-columns:1fr;gap:48px}
+  .hero__grid{grid-template-columns:1fr;gap:48px}
   .hero__visual{justify-self:center;max-width:440px;width:88%}
   .hero__chip{left:-6%}
   .about__grid,.areas__head,.tool__head,.tool__grid,.laser__grid,.results__grid,.space__grid,.faq__grid,.contact__grid{grid-template-columns:1fr}

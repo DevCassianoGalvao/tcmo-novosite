@@ -257,15 +257,13 @@
   // leve parallax do hero ao rolar
   gsap.to('.hero__window img', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
-  // Brilho e profundidade no hero acompanhando o cursor (desktop)
+  // Profundidade sutil no hero acompanhando o cursor (desktop)
   if (window.matchMedia('(hover: hover) and (min-width: 901px)').matches) {
-    var hero = $('.hero'), glow = $('.hero__glow');
-    var gx = gsap.quickTo(glow, 'x', { duration: .8, ease: 'power3' }), gy = gsap.quickTo(glow, 'y', { duration: .8, ease: 'power3' });
+    var hero = $('.hero');
     var fx = gsap.quickTo('.hero__frame', 'xPercent', { duration: 1.2, ease: 'power3' }), fy = gsap.quickTo('.hero__frame', 'yPercent', { duration: 1.2, ease: 'power3' });
     var wx = gsap.quickTo('.hero__window', 'xPercent', { duration: 1.2, ease: 'power3' }), wy = gsap.quickTo('.hero__window', 'yPercent', { duration: 1.2, ease: 'power3' });
     hero.addEventListener('pointermove', function (e) {
       var r = hero.getBoundingClientRect();
-      gx(e.clientX - r.left); gy(e.clientY - r.top);
       var nx = (e.clientX / r.width - .5), ny = (e.clientY / r.height - .5);
       fx(nx * 2.4); fy(ny * 2.4); wx(nx * -1); wy(ny * -1);
     });
