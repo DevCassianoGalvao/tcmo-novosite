@@ -497,3 +497,6 @@ h1,h2,h3{margin:0;font-weight:inherit}
   .tech__tabs button{flex:1;padding:10px 8px;font-size:14px}
   .laser__copy{text-align:left}
 }
+
+.hp-field{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.form__ok{grid-column:1/-1;color:var(--champ);font-size:14px}

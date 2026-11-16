@@ -13,6 +13,18 @@
 
   function waLink(text) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); }
 
+  /* Envia os dados para o e-mail da clínica (Brevo, via /api/contato).
+     Roda em segundo plano: se a API ainda não estiver configurada, o WhatsApp segue funcionando. */
+  function sendLead(data) {
+    data.pagina = location.href;
+    try {
+      return fetch('/api/contato', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data), keepalive: true
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
+  }
+
   /* ---------- Smooth scroll ---------- */
   var lenis = null;
   if (!reduce && typeof window.Lenis !== 'undefined') {
@@ -211,6 +223,10 @@
     var msg = 'Olá! ' + (name ? 'Sou ' + name + '. ' : '') + 'Montei minha pré-avaliação no site da TCMO e gostaria de agendar uma avaliação.\n';
     ['rosto', 'sorriso', 'saude'].forEach(function (k) { if (groups[k]) msg += '\n' + DATA[k].label + ': ' + groups[k].join(', '); });
     window.open(waLink(msg), '_blank', 'noopener');
+    sendLead({
+      tipo: 'pre-avaliacao', nome: name || 'Não informado', telefone: ($('#plan-tel').value || '').trim(),
+      selecoes: Object.keys(picked).map(function (id) { return { area: DATA[picked[id].area].label, item: picked[id].t }; })
+    });
   });
 
   renderChoices(); renderPlan();
@@ -227,6 +243,11 @@
     if ((d.get('tel') || '').trim()) msg += '\nTelefone: ' + d.get('tel').trim();
     if ((d.get('msg') || '').trim()) msg += '\n\n' + d.get('msg').trim();
     window.open(waLink(msg), '_blank', 'noopener');
+    sendLead({
+      tipo: 'contato', nome: nome, telefone: (d.get('tel') || '').trim(), email: (d.get('email') || '').trim(),
+      interesse: d.get('interesse'), mensagem: (d.get('msg') || '').trim(), empresa: d.get('empresa') || ''
+    });
+    $('#form-ok').hidden = false;
   });
 
   /* ---------- Tecnologias: abas ---------- */
