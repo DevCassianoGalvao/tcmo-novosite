@@ -111,14 +111,14 @@
   /* ---------- Pré-avaliação ---------- */
   var DATA = {
     rosto: { label: 'Rosto e pele', items: [
-      { id: 'testa', t: 'Testa e linhas de expressão', p: 'Suavização de rugas', i: 'i-waves' },
+      { id: 'testa', t: 'Testa e linhas de expressão', p: 'Toxina botulínica', i: 'i-waves' },
       { id: 'olheiras', t: 'Olheiras e olhar cansado', p: 'Preenchimento facial', i: 'i-glow' },
       { id: 'nariz', t: 'Nariz', p: 'Preenchimento facial', i: 'i-profile' },
-      { id: 'pele', t: 'Pele, poros e manchas', p: 'CO₂ Laser ou bioestimuladores de colágeno', i: 'i-pores' },
+      { id: 'pele', t: 'Pele, poros e manchas', p: 'CO₂ Laser, Lavieen ou bioestimuladores', i: 'i-pores' },
       { id: 'sulco', t: 'Bigode chinês', p: 'Preenchimento ou bioestimulador', i: 'i-syringe' },
       { id: 'labios', t: 'Lábios', p: 'Preenchimento labial', i: 'i-drop' },
-      { id: 'mandibula', t: 'Contorno da mandíbula', p: 'Preenchimento ou fios de sustentação', i: 'i-thread' },
-      { id: 'papada', t: 'Queixo e papada', p: 'Lipo de papada ou preenchimento', i: 'i-chin' }
+      { id: 'mandibula', t: 'Contorno da mandíbula', p: 'Preenchimento, fios ou Ultraformer', i: 'i-thread' },
+      { id: 'papada', t: 'Queixo e papada', p: 'Lipo de papada (cirurgia da face) ou preenchimento', i: 'i-chin' }
     ] },
     sorriso: { label: 'Sorriso', items: [
       { id: 'cor', t: 'Cor e formato dos dentes', p: 'Lentes de contato, facetas ou restaurações estéticas', i: 'i-veneer' },
@@ -128,10 +128,10 @@
       { id: 'urgencia', t: 'Preciso de atendimento urgente', p: 'Urgência odontológica 24h', i: 'i-clock' }
     ] },
     saude: { label: 'Saúde', items: [
-      { id: 'checkup', t: 'Check-up e acompanhamento', p: 'Clínica geral', i: 'i-steth' },
+      { id: 'checkup', t: 'Check-up e acompanhamento', p: 'Medicina: clínica geral', i: 'i-steth' },
       { id: 'alimentacao', t: 'Alimentação e peso', p: 'Nutrologia e nutrição', i: 'i-apple' },
       { id: 'idoso', t: 'Cuidado com a saúde depois dos 60', p: 'Geriatria', i: 'i-pulse' },
-      { id: 'cirurgia', t: 'Avaliação para cirurgia', p: 'Cirurgia geral ou plástica', i: 'i-scalpel' }
+      { id: 'cirurgia', t: 'Avaliação para cirurgia', p: 'Cirurgia da face ou cirurgia geral', i: 'i-scalpel' }
     ] }
   };
   var picked = {}; // id -> {area, t}
@@ -229,6 +229,32 @@
     window.open(waLink(msg), '_blank', 'noopener');
   });
 
+  /* ---------- Tecnologias: abas ---------- */
+  var onTech = null, techCur = 'co2';
+  var techTabs = $$('.tech__tabs [role="tab"]');
+  function selectTech(tab, focus) {
+    var key = tab.getAttribute('data-tech');
+    techTabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      $('#' + t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+    if (key === techCur) return;
+    var from = techCur; techCur = key;
+    if (onTech) onTech(from, key);
+    else $$('.laser-illus .tg').forEach(function (g) { g.style.opacity = g.classList.contains('t-' + key) ? 1 : 0; });
+  }
+  techTabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { selectTech(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        selectTech(techTabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + techTabs.length) % techTabs.length], true);
+      }
+    });
+  });
+
   /* ---------- Contadores ---------- */
   function countUp(el) {
     var end = parseInt(el.getAttribute('data-count'), 10);
@@ -300,27 +326,80 @@
      .from($$('.guides', svg), { opacity: 0, duration: 1.4 }, .6);
   });
 
-  // CO2 Laser: entrada + ciclo do feixe fracionado
+  // Tecnologias estéticas: entrada + ciclos de cada tecnologia
   var lt = gsap.timeline({ scrollTrigger: { trigger: '.laser', start: 'top 65%', once: true } });
   lt.from('.laser__title', { yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out' }, 0.2)
-    .from('.laser .benefits li', { opacity: 0, x: 24, stagger: .1, duration: .8, ease: 'power3.out' }, 0.5)
-    .from('.laser-illus .lbls', { opacity: 0, duration: 1 }, 1.6);
-  var loop = gsap.timeline({ repeat: -1, repeatDelay: .6, paused: true });
-  loop.set('.laser-illus .mcol', { scaleY: 0 })
-    .set('.laser-illus .mdot', { opacity: 0, scale: .4, transformOrigin: '50% 50%' })
-    .to('.laser-illus .hp', { y: 10, duration: .5, ease: 'power2.inOut' })
-    .fromTo('.laser-illus .beam', { opacity: 0 }, { opacity: 1, duration: .25, ease: 'none' })
-    .to('.laser-illus .mdot', { opacity: 1, scale: 1, duration: .3, stagger: { each: .06, from: 'center' }, ease: 'back.out(3)' }, '<')
-    .to('.laser-illus .mcol', { scaleY: 1, duration: .9, stagger: { each: .06, from: 'center' }, ease: 'power3.out' }, '<.1')
-    .to('.laser-illus .beam', { opacity: .35, duration: .15, repeat: 5, yoyo: true, ease: 'none' }, '<')
-    .to('.laser-illus .beam', { opacity: 0, duration: .4 })
-    .to('.laser-illus .hp', { y: 0, duration: .6, ease: 'power2.inOut' }, '<')
-    .to('.laser-illus .fibers path', { opacity: 1, stroke: '#EFE3C8', duration: .5, stagger: .1 }, '<')
-    .to('.laser-illus .fibers path', { opacity: .7, stroke: '#D9C6A1', duration: .8, stagger: .1 })
+    .from('.tech__tabs', { opacity: 0, y: 12, duration: .8, ease: 'power3.out' }, 0.4)
+    .from('#tp-co2 .benefits li', { opacity: 0, x: 24, stagger: .1, duration: .8, ease: 'power3.out' }, 0.5);
+
+  var L = '.laser-illus ';
+  var loops = {};
+  loops.co2 = gsap.timeline({ repeat: -1, repeatDelay: .6, paused: true });
+  loops.co2.set(L + '.mcol', { scaleY: 0, opacity: 1, transformOrigin: '50% 0%' })
+    .set(L + '.mdot', { opacity: 0, scale: .4, transformOrigin: '50% 50%' })
+    .to(L + '.hp', { y: 10, duration: .5, ease: 'power2.inOut' })
+    .fromTo(L + '.t-co2 .beam', { opacity: 0 }, { opacity: 1, duration: .25, ease: 'none' })
+    .to(L + '.mdot', { opacity: 1, scale: 1, duration: .3, stagger: { each: .06, from: 'center' }, ease: 'back.out(3)' }, '<')
+    .to(L + '.mcol', { scaleY: 1, duration: .9, stagger: { each: .06, from: 'center' }, ease: 'power3.out' }, '<.1')
+    .to(L + '.t-co2 .beam', { opacity: .35, duration: .15, repeat: 5, yoyo: true, ease: 'none' }, '<')
+    .to(L + '.t-co2 .beam', { opacity: 0, duration: .4 })
+    .to(L + '.hp', { y: 0, duration: .6, ease: 'power2.inOut' }, '<')
+    .to(L + '.fibers path', { opacity: 1, stroke: '#EFE3C8', duration: .5, stagger: .1 }, '<')
+    .to(L + '.fibers path', { opacity: .7, stroke: '#D9C6A1', duration: .8, stagger: .1 })
     .to({}, { duration: 1.4 })
-    .to('.laser-illus .mcol', { opacity: 0, duration: .6 })
-    .set('.laser-illus .mcol', { opacity: 1 });
-  ScrollTrigger.create({ trigger: '.laser__art', start: 'top 85%', end: 'bottom 10%', onToggle: function (self) { self.isActive ? loop.play() : loop.pause(); } });
+    .to(L + '.mcol', { opacity: 0, duration: .6 });
+
+  loops.ultra = gsap.timeline({ repeat: -1, repeatDelay: .4, paused: true });
+  loops.ultra.set(L + '.uwave', { opacity: 0, y: -8 })
+    .set(L + '.upt', { scale: 0, transformOrigin: '50% 50%' })
+    .set(L + '.ucone', { opacity: 0 })
+    .to(L + '.hp', { y: 18, duration: .6, ease: 'power2.inOut' })
+    .to(L + '.uwave', { opacity: .9, y: 0, duration: .5, stagger: .18, ease: 'power2.out' })
+    .to(L + '.ucone', { opacity: 1, duration: .5, stagger: .08 }, '-=.2')
+    .to(L + '.upt', { scale: 1, duration: .45, stagger: .08, ease: 'back.out(3)' }, '<.2')
+    .to(L + '.upt', { scale: 1.6, opacity: .5, duration: .5, repeat: 3, yoyo: true, stagger: .05, ease: 'sine.inOut' })
+    .to(L + '.fibers path', { opacity: 1, stroke: '#EFE3C8', duration: .5, stagger: .1 }, '<')
+    .to(L + '.uwave', { opacity: 0, duration: .4 })
+    .to(L + '.fibers path', { opacity: .7, stroke: '#D9C6A1', duration: .8, stagger: .1 }, '<')
+    .to(L + '.hp', { y: 0, duration: .6, ease: 'power2.inOut' }, '<')
+    .to({}, { duration: 1 })
+    .to([L + '.ucone', L + '.upt'], { opacity: 0, duration: .5 })
+    .set(L + '.upt', { opacity: 1 });
+
+  loops.lav = gsap.timeline({ repeat: -1, repeatDelay: .4, paused: true });
+  loops.lav.set(L + '.ldot', { opacity: 0, scale: .3, transformOrigin: '50% 50%' })
+    .set(L + '.lcol', { scaleY: 0, opacity: 1, transformOrigin: '50% 0%' })
+    .set(L + '.beam-lav', { x: -50, opacity: 0 })
+    .to(L + '.hp', { y: 8, x: -50, duration: .5, ease: 'power2.inOut' })
+    .to(L + '.beam-lav', { opacity: .75, duration: .2 }, '<.3')
+    .to([L + '.hp', L + '.beam-lav'], { x: 50, duration: 2.2, ease: 'none' })
+    .to(L + '.ldot', { opacity: 1, scale: 1, duration: .25, stagger: .15, ease: 'back.out(3)' }, '<')
+    .to(L + '.lcol', { scaleY: 1, duration: .5, stagger: .15, ease: 'power3.out' }, '<.1')
+    .to(L + '.beam-lav', { opacity: 0, duration: .3 })
+    .to(L + '.hp', { x: 0, y: 0, duration: .7, ease: 'power2.inOut' }, '<')
+    .to(L + '.fibers path', { opacity: 1, stroke: '#EFE3C8', duration: .5, stagger: .1 }, '<')
+    .to(L + '.fibers path', { opacity: .7, stroke: '#D9C6A1', duration: .8, stagger: .1 })
+    .to({}, { duration: 1.2 })
+    .to([L + '.ldot', L + '.lcol'], { opacity: 0, duration: .5 });
+
+  var techNow = 'co2', techInView = false;
+  function playTech() { Object.keys(loops).forEach(function (k) { if (k === techNow && techInView) loops[k].play(); else loops[k].pause(); }); }
+  ScrollTrigger.create({ trigger: '.laser__art', start: 'top 85%', end: 'bottom 10%', onToggle: function (self) { techInView = self.isActive; playTech(); } });
+
+  onTech = function (from, to) {
+    loops[from].pause(0);
+    gsap.set(L + '.hp', { x: 0, y: 0 });
+    gsap.to(L + '.t-' + from, { opacity: 0, duration: .4 });
+    gsap.to(L + '.t-' + to, { opacity: 1, duration: .5, delay: .2 });
+    techNow = to;
+    loops[to].restart();
+    if (!techInView) loops[to].pause();
+    gsap.from('#tp-' + to + ' .tech__name, #tp-' + to + ' .laser__sub', { opacity: 0, y: 14, stagger: .06, duration: .6, ease: 'power3.out' });
+    gsap.from('#tp-' + to + ' .benefits li', { opacity: 0, x: 20, stagger: .07, duration: .6, ease: 'power3.out' });
+  };
+
+  // Centro cirúrgico
+  ScrollTrigger.batch('.sg', { start: 'top 85%', once: true, onEnter: function (b) { gsap.from(b, { clipPath: 'inset(100% 0% 0% 0% round 40px)', stagger: .12, duration: 1.3, ease: 'expo.inOut' }); } });
 
   // Dica de arraste no comparador
   ScrollTrigger.create({ trigger: '#compare', start: 'top 70%', once: true, onEnter: function () {

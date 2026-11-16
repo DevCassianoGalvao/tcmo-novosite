@@ -81,8 +81,8 @@ h1,h2,h3{margin:0;font-weight:inherit}
 .nav.is-scrolled{--nav-h:70px;background:rgba(7,13,25,.78);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 1px 0 var(--line)}
 .nav__inner{height:100%;display:flex;align-items:center;gap:32px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;margin-right:auto}
-.brand__sym{width:38px;height:38px;background:var(--champ);-webkit-mask:url(../brand/logo-symbol.svg) center/contain no-repeat;mask:url(../brand/logo-symbol.svg) center/contain no-repeat}
-.brand__word{width:96px;height:auto}
+.brand__sym{width:46px;height:46px;background:var(--champ);-webkit-mask:url(../brand/logo-symbol.svg) center/contain no-repeat;mask:url(../brand/logo-symbol.svg) center/contain no-repeat}
+.brand__word{width:124px;height:auto}
 .nav__links{display:flex;gap:28px}
 .nav__links a{text-decoration:none;font-size:15px;color:var(--muted);transition:color .3s;position:relative}
 .nav__links a:hover,.nav__links a.is-active{color:var(--white)}
@@ -184,12 +184,12 @@ h1,h2,h3{margin:0;font-weight:inherit}
 .laser-illus{width:88%}
 .laser-illus .skin-fill{fill:url(#gSkin);stroke:none}
 .laser-illus .beam{fill:url(#gBeam);stroke:none}
-.laser-illus .mcol{fill:url(#gCol);stroke:none;transform-box:fill-box;transform-origin:50% 0}
+.laser-illus .mcol{fill:url(#gCol);stroke:none}
 .laser-illus .mdot{fill:#EFE3C8;stroke:none}
 .laser-illus .fibers path{opacity:.7}
 .laser-illus .leader{stroke:var(--champ);stroke-opacity:.5;stroke-width:1}
 .laser-illus text{font-family:var(--sans);font-size:13px;fill:var(--muted);stroke:none;letter-spacing:.02em}
-.laser__title{font-family:var(--serif);font-weight:400;font-size:clamp(72px,10vw,148px);line-height:.9;letter-spacing:-.02em;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.05em}
+.laser__title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.6vw,68px);line-height:1;letter-spacing:-.01em;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.05em}
 .laser__title sub{font-size:.45em;vertical-align:baseline;position:relative;top:.08em;margin:0 .04em}
 .laser__sub{margin-top:18px;font-size:19px;color:var(--cream);padding-bottom:28px;border-bottom:1px solid var(--line);max-width:30ch}
 .benefits{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px;margin:36px 0 44px}
@@ -404,7 +404,8 @@ h1,h2,h3{margin:0;font-weight:inherit}
   .hero__chip{left:0;right:0;margin:0 auto;width:max-content;bottom:20px;text-align:left}
   .values li:last-child{grid-column:1/-1}
   .facts dt{font-size:32px!important}
-  .laser__title{font-size:64px}
+  .laser__title{font-size:38px}
+  .tech__name{font-size:40px}
   .nav__cta{display:none}
   .hero__actions .btn{width:100%}
   .values{grid-template-columns:1fr 1fr;row-gap:8px}
@@ -433,4 +434,66 @@ h1,h2,h3{margin:0;font-weight:inherit}
   .js .hero__window{clip-path:none}
   .js .hero__frame rect{stroke-dashoffset:0}
   .ticker__track{animation:none}
+}
+
+/* ---------- Revisão: rótulos, cirurgia, tecnologias, equipe ---------- */
+.proc__label{font-size:14px;color:var(--champ);letter-spacing:.04em;margin-top:6px}
+.proc__label+.proc{margin-top:4px}
+
+.panel__art--duo{overflow:hidden}
+.panel__art--duo>img{object-position:50% 30%}
+.duo__inset{position:absolute;left:18px;bottom:18px;width:38%;max-width:200px;margin:0;padding:8px 8px 10px;border-radius:18px;background:rgba(7,13,25,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px var(--line)}
+.duo__inset img{position:static;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:12px}
+.duo__inset span{display:block;margin-top:8px;font-size:12px;line-height:1.35;color:var(--cream)}
+
+.surgery{padding:0 0 calc(var(--sec)*.8)}
+.surgery__head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:48px}
+.surgery__grid{display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:16px;align-items:end}
+.sg{border-radius:calc(var(--r-window)*.8);overflow:hidden;background:var(--navy-2)}
+.sg img{width:100%;height:100%;object-fit:cover}
+.sg1{aspect-ratio:4/5}.sg2{aspect-ratio:3/4}.sg3{aspect-ratio:3/4;margin-bottom:48px}
+.sg2 img{object-position:50% 35%}
+
+.tech__tabs{display:inline-flex;flex-wrap:wrap;gap:4px;padding:5px;margin:28px 0 8px;border-radius:999px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line)}
+.tech__tabs button{border:0;background:transparent;padding:10px 20px;border-radius:999px;font-size:15px;font-weight:500;color:var(--muted);transition:background-color .3s,color .3s}
+.tech__tabs button:hover{color:var(--white)}
+.tech__tabs button[aria-selected="true"]{background:var(--gold-grad);color:var(--navy)}
+.tech{padding-top:24px}
+.tech[hidden]{display:none}
+.tech__name{font-family:var(--serif);font-weight:400;font-size:clamp(44px,4.4vw,64px);line-height:1;color:var(--white)}
+.tech__name sub{font-size:.45em;vertical-align:baseline;position:relative;top:.08em}
+
+.laser-illus .tg{transition:opacity .5s var(--ease)}
+.laser-illus .t-ultra,.laser-illus .t-lav{opacity:0}
+.laser-illus .uwave{stroke:#EFE3C8;stroke-width:1.4;opacity:.8}
+.laser-illus .ucone{fill:#D9C6A1;fill-opacity:.12;stroke:#D9C6A1;stroke-opacity:.45;stroke-width:1}
+.laser-illus .upt{fill:#EFE3C8;stroke:none}
+.laser-illus .ulayer{stroke:#D9C6A1;stroke-opacity:.5;stroke-dasharray:3 6}
+.laser-illus .beam-lav{fill:url(#gBeam);stroke:none;opacity:.7}
+.laser-illus .ldot{fill:#EFE3C8;stroke:none}
+.laser-illus .lcol{fill:url(#gCol);stroke:none}
+
+.team__more{margin-top:56px;padding-top:32px;border-top:1px solid var(--line)}
+.mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,360px));gap:16px;margin-top:16px}
+.mini{display:flex;align-items:center;gap:16px;padding:14px 18px 14px 14px;border-radius:20px;background:var(--navy);box-shadow:inset 0 0 0 1px var(--line)}
+.mini__photo{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 30% 30%,var(--navy-3),var(--navy-2));box-shadow:inset 0 0 0 1px var(--champ);font-family:var(--serif);font-size:22px;color:var(--champ)}
+.mini__photo img{width:100%;height:100%;object-fit:cover}
+.mini__name{font-family:var(--serif);font-size:22px;color:var(--white);line-height:1.1}
+.mini__role{font-size:14px;color:var(--champ);margin-top:2px}
+.mini .doc__reg{padding-top:2px;font-size:13px}
+
+@media (max-width:900px){
+  .surgery__head{grid-template-columns:1fr;gap:16px}
+  .surgery__grid{grid-template-columns:1fr 1fr}
+  .sg1{grid-column:1/-1;aspect-ratio:4/3}
+  .sg3{margin-bottom:0}
+  .panel__art--duo{aspect-ratio:4/5}
+  .mini-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .brand__sym{width:40px;height:40px}
+  .brand__word{width:108px}
+  .tech__tabs{display:flex}
+  .tech__tabs button{flex:1;padding:10px 8px;font-size:14px}
+  .laser__copy{text-align:left}
 }
