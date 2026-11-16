@@ -72,7 +72,7 @@
     <symbol id="i-collagen" viewBox="0 0 32 32"><circle cx="9" cy="9" r="2.4"/><circle cx="23" cy="9" r="2.4"/><circle cx="16" cy="17" r="2.4"/><circle cx="8" cy="25" r="2.4"/><circle cx="24" cy="25" r="2.4"/><path d="M10.7 10.7l3.6 4.6M21.3 10.7l-3.6 4.6M14.4 18.8l-4.7 4.4M17.6 18.8l4.7 4.4M11.4 9h9.2"/></symbol>
     <symbol id="i-glow" viewBox="0 0 32 32"><path d="M15 3.5c-4.6.6-7 4-7 7.6 0 1.4-2 3-2 4.1s1.9 1 1.9 2-.9 1.6 0 2.4c.8.6.2 1.4.6 2.3.7 1.3 2.4 1.5 3.6 2.6 1.4 1.3 1.6 3.5 1.6 5"/><path d="M23 6.5l1.2 3.3 3.3 1.2-3.3 1.2-1.2 3.3-1.2-3.3-3.3-1.2 3.3-1.2zM24 20v4M22 22h4"/></symbol>
     <symbol id="i-pin" viewBox="0 0 32 32"><path d="M16 28.5s9-8.4 9-15a9 9 0 0 0-18 0c0 6.6 9 15 9 15z"/><circle cx="16" cy="13.5" r="3.2"/></symbol>
-    <symbol id="i-wa" viewBox="0 0 32 32"><path d="M5 27.5l1.7-5.6A11.5 11.5 0 1 1 10.5 26z"/><path d="M12.2 10.2c-.6 0-1.4.8-1.4 2.2 0 3.8 5 9 9 9 1.4 0 2.2-.8 2.2-1.4 0-.5-2.2-1.8-2.7-1.8s-1 1-1.6 1c-1.4 0-4.2-2.8-4.2-4.2 0-.6 1-1.1 1-1.6s-1.3-2.7-1.8-2.7z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 32 32"><path d="M5 27.5l1.7-5.6A11.5 11.5 0 1 1 10.5 26z"/><path fill="currentColor" stroke="none" d="M12.5 9.4c-.5 0-1.3.2-1.9.9-.6.7-1.3 1.6-1.3 3.4 0 3.7 5 9.8 10.8 9.8 1.6 0 2.7-.6 3.3-1.3.5-.6.7-1.4.5-1.9-.1-.3-2.5-1.5-3-1.6-.5-.2-.8 0-1.1.4-.3.5-.9 1.1-1.1 1.3-.3.2-.6.1-1-.1-2-1-3.4-2.4-4-3.7-.2-.4 0-.6.2-.8.3-.3.5-.6.7-.9.2-.3.1-.6 0-.8-.1-.3-1-2.6-1.4-3.3-.2-.5-.5-.5-.8-.5z"/></symbol>
     <symbol id="i-ig" viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="22" rx="6.5"/><circle cx="16" cy="16" r="5"/><circle cx="22.5" cy="9.5" r=".9" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-cal" viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="3.5"/><path d="M5 13h22M11 4v5M21 4v5M10.5 18h3M15 18h3M19.5 18h3M10.5 22.5h3M15 22.5h3"/></symbol>
     <symbol id="i-check" viewBox="0 0 32 32"><path d="M7 16.5l6 6L25 10"/></symbol>
@@ -121,13 +121,13 @@
   <!-- HERO -->
   <section class="hero">
     <span class="hero__mark" aria-hidden="true"></span>
+    <span class="hero__glow" aria-hidden="true"></span>
     <div class="wrap hero__grid">
       <div class="hero__copy">
         <p class="hero__place" data-hero>Clínica integrada na Mooca, São Paulo</p>
         <h1 class="hero__title">
-          <span class="line"><span data-hero-line>Saúde, sorriso</span></span>
-          <span class="line"><span data-hero-line>e estética em</span></span>
-          <span class="line"><span data-hero-line>um só lugar.</span></span>
+          <span class="line"><span data-hero-line>Saúde, sorriso e estética</span></span>
+          <span class="line"><span data-hero-line>em um só lugar.</span></span>
         </h1>
         <p class="hero__lead" data-hero>Médicos e dentistas especialistas trabalham juntos para cuidar de você por inteiro, com tecnologia atual, atendimento humanizado e resultados naturais.</p>
         <div class="hero__actions" data-hero>
@@ -140,7 +140,7 @@
       </div>
 
       <div class="hero__visual">
-        <svg class="hero__frame" viewBox="0 0 500 560" aria-hidden="true" preserveAspectRatio="none">
+        <svg class="hero__frame" viewBox="0 0 500 560" aria-hidden="true">
           <rect x="1" y="1" width="498" height="558" rx="96" ry="96" pathLength="1"/>
         </svg>
         <figure class="hero__window">
@@ -165,10 +165,23 @@
     <div class="wrap about__grid">
       <div class="about__text">
         <h2 class="h2">Mais que uma clínica, um centro de cuidado integral.</h2>
-        <p class="manifesto" data-split>Aqui, quem cuida do seu sorriso conversa com quem cuida da sua pele e da sua saúde. Cada paciente recebe um plano único, pensado para a sua fase de vida, com segurança, conforto e naturalidade.</p>
+        <p class="manifesto">Aqui, quem cuida do seu sorriso conversa com quem cuida da sua pele e da sua saúde. Cada paciente recebe um plano único, pensado para a sua fase de vida, com segurança, conforto e naturalidade.</p>
       </div>
-      <figure class="about__img" data-parallax>
-        <img src="assets/img/consultorio.webp" width="1086" height="1448" alt="Consultório odontológico da TCMO com cadeira moderna, bancada clara e iluminação indireta" loading="lazy">
+      <figure class="about__art" aria-label="Ilustração: medicina, odontologia e estética se encontrando no centro, onde está a TCMO">
+        <svg class="venn" viewBox="0 0 440 440" aria-hidden="true">
+          <g class="venn__spin"><circle class="venn__orbit" cx="220" cy="235" r="196"/><circle class="venn__dot" cx="220" cy="39" r="4"/></g>
+          <g class="venn__rings">
+            <circle cx="220" cy="160" r="112"/>
+            <circle cx="155" cy="272" r="112"/>
+            <circle cx="285" cy="272" r="112"/>
+          </g>
+          <g class="venn__labels">
+            <text x="220" y="112">Medicina</text>
+            <text x="124" y="312">Odontologia</text>
+            <text x="316" y="312">Estética</text>
+          </g>
+          <image class="venn__logo" href="assets/brand/logo-symbol-gold.svg" x="196" y="211" width="48" height="47"/>
+        </svg>
       </figure>
     </div>
     <ul class="wrap values" role="list">
@@ -205,7 +218,7 @@
             <a class="link" href="https://wa.me/5511966432515?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20harmoniza%C3%A7%C3%A3o%20orofacial." target="_blank" rel="noopener">Falar sobre harmonização</a>
           </div>
           <div class="panel__art panel__art--illus" aria-hidden="true">
-            <svg viewBox="0 0 300 400" class="profile">
+            <svg viewBox="0 0 300 400" class="illus">
               <g class="guides">
                 <path d="M30 128H280M30 198H280M30 252H280"/>
                 <circle cx="150" cy="190" r="120"/>
@@ -254,9 +267,17 @@
             </ul>
             <a class="link" href="https://wa.me/5511966432515?text=Ol%C3%A1!%20Quero%20agendar%20uma%20consulta%20m%C3%A9dica." target="_blank" rel="noopener">Agendar consulta médica</a>
           </div>
-          <figure class="panel__art">
-            <img src="assets/img/sala.webp" width="1086" height="1448" alt="Sala de atendimento da TCMO com mesa de consulta, lustre de globos e cadeira de atendimento" loading="lazy">
-          </figure>
+          <div class="panel__art panel__art--illus" aria-hidden="true">
+            <svg viewBox="0 0 300 400" class="illus">
+              <g class="guides"><circle cx="150" cy="200" r="124"/><path d="M26 200H274"/></g>
+              <circle class="draw" cx="112" cy="46" r="6"/><circle class="draw" cx="188" cy="46" r="6"/>
+              <path class="draw" d="M112 52v52c0 34 16 56 38 62 22-6 38-28 38-62V52"/>
+              <path class="draw" d="M150 166v40c0 40-58 44-58 92 0 34 30 52 60 50"/>
+              <circle class="draw" cx="176" cy="342" r="24"/><circle class="draw" cx="176" cy="342" r="11"/>
+              <path class="draw" d="M206 224c-10-14-34-10-34 8 0 18 34 36 34 36s34-18 34-36c0-18-24-22-34-8z"/>
+              <path class="draw pulse" d="M24 388h82l10-20 14 34 10-24 8 10h128"/>
+            </svg>
+          </div>
         </article>
       </div>
     </div>
@@ -265,8 +286,39 @@
   <!-- CO2 LASER -->
   <section class="laser" aria-labelledby="laser-title">
     <div class="wrap laser__grid">
-      <figure class="laser__photo">
-        <img src="assets/img/dr-luan.webp" width="837" height="1280" alt="Dr. Luan Andrade, cirurgião-dentista especialista em harmonização orofacial" loading="lazy">
+<figure class="laser__art" aria-label="Ilustração: ponteira do CO₂ Laser emitindo feixe fracionado sobre a pele e estimulando colágeno">
+        <svg class="illus laser-illus" viewBox="0 0 480 600" aria-hidden="true">
+          <defs>
+            <linearGradient id="gBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EFE3C8" stop-opacity=".85"/><stop offset="1" stop-color="#D9C6A1" stop-opacity=".04"/></linearGradient>
+            <linearGradient id="gCol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EFE3C8"/><stop offset="1" stop-color="#B8996A" stop-opacity="0"/></linearGradient>
+            <linearGradient id="gSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9C6A1" stop-opacity=".12"/><stop offset="1" stop-color="#D9C6A1" stop-opacity="0"/></linearGradient>
+          </defs>
+          <g class="guides"><circle cx="240" cy="300" r="214"/></g>
+          <path class="skin-fill" d="M30 312c60-14 120 12 190-2s130-14 230 4V560a20 20 0 0 1-20 20H50a20 20 0 0 1-20-20z"/>
+          <path class="beam" d="M233 218h14l72 92H161z"/>
+          <rect class="mcol" x="170.5" y="318" width="3" height="78" rx="1.5"/><rect class="mcol" x="187.5" y="318" width="3" height="96" rx="1.5"/><rect class="mcol" x="204.5" y="318" width="3" height="70" rx="1.5"/><rect class="mcol" x="221.5" y="318" width="3" height="104" rx="1.5"/><rect class="mcol" x="238.5" y="318" width="3" height="88" rx="1.5"/><rect class="mcol" x="255.5" y="318" width="3" height="110" rx="1.5"/><rect class="mcol" x="272.5" y="318" width="3" height="74" rx="1.5"/><rect class="mcol" x="289.5" y="318" width="3" height="98" rx="1.5"/><rect class="mcol" x="306.5" y="318" width="3" height="84" rx="1.5"/>
+          <path class="draw" d="M30 312c60-14 120 12 190-2s130-14 230 4"/>
+          <path class="draw soft" d="M30 352c60-14 120 12 190-2s130-14 230 4"/>
+          <path class="draw" d="M30 312V560a20 20 0 0 0 20 20h380a20 20 0 0 0 20-20V314"/>
+          <g class="fibers">
+            <path class="draw" d="M54 446c24-12 48 12 72 0s48 12 72 0 48 12 72 0 48 12 72 0 48 12 72 0"/>
+            <path class="draw" d="M54 478c24-12 48 12 72 0s48 12 72 0 48 12 72 0 48 12 72 0 48 12 72 0"/>
+            <path class="draw" d="M54 510c24-12 48 12 72 0s48 12 72 0 48 12 72 0 48 12 72 0 48 12 72 0"/>
+            <path class="draw" d="M54 542c24-12 48 12 72 0s48 12 72 0 48 12 72 0 48 12 72 0 48 12 72 0"/>
+          </g>
+          <circle class="mdot" cx="172" cy="313" r="3.2"/><circle class="mdot" cx="189" cy="311" r="3.2"/><circle class="mdot" cx="206" cy="313" r="3.2"/><circle class="mdot" cx="223" cy="311" r="3.2"/><circle class="mdot" cx="240" cy="313" r="3.2"/><circle class="mdot" cx="257" cy="311" r="3.2"/><circle class="mdot" cx="274" cy="313" r="3.2"/><circle class="mdot" cx="291" cy="311" r="3.2"/><circle class="mdot" cx="308" cy="313" r="3.2"/>
+          <g class="hp">
+            <path class="draw" d="M218 40h44a10 10 0 0 1 10 10v116a10 10 0 0 1-10 10h-44a10 10 0 0 1-10-10V50a10 10 0 0 1 10-10z"/>
+            <path class="draw" d="M208 72h64M208 146h64"/>
+            <circle class="draw" cx="240" cy="109" r="10"/>
+            <path class="draw" d="M220 176l8 42h24l8-42"/>
+          </g>
+          <g class="lbls">
+            <path class="leader" d="M300 262l30-22h74"/><text x="332" y="230">Feixe fracionado</text>
+            <path class="leader" d="M300 378l30-18h88"/><text x="332" y="350">Microcolunas</text>
+            <path class="leader" d="M118 432l-20-26H38"/><text x="38" y="396">Novo colágeno</text>
+          </g>
+        </svg>
       </figure>
       <div class="laser__copy">
         <h2 class="laser__title" id="laser-title">CO<sub>2</sub> Laser</h2>
@@ -301,54 +353,71 @@
           <!-- Rosto -->
           <div class="pane" id="pane-rosto" role="tabpanel" aria-labelledby="tab-rosto">
             <div class="face">
-              <svg viewBox="0 0 400 500" class="face__svg" aria-hidden="true">
-                <path d="M200 52c-62 0-94 48-90 118 4 80-8 160-22 250" class="hair"/>
-                <path d="M200 52c62 0 94 48 90 118-4 80 8 160 22 250" class="hair"/>
-                <path d="M200 52c-2 7-2 12 1 18" class="soft"/>
-                <path d="M201 70c-32 4-56 32-61 90M201 70c30 8 54 34 59 90"/>
-                <path d="M140 160c-6 72 0 140 26 190 14 28 26 46 34 48 8-2 20-20 34-48 26-50 32-118 26-190"/>
-                <path d="M140 160c-6 70-10 140-16 220M260 160c6 70 10 140 16 220" class="soft"/>
-                <path d="M152 190c14-9 30-9 40-3M208 187c10-6 26-6 40 3"/>
-                <path d="M156 212c10 8 24 8 34 0M210 212c10 8 24 8 34 0"/>
-                <path d="M160 216l-3 4M167 219l-2 4M175 220l-1 4M233 219l2 4M225 220l1 4M240 216l3 4" class="soft"/>
-                <path d="M197 218c-1 26-6 42-9 50 4 8 11 10 17 6M213 268c-1 6-5 8-8 6"/>
-                <path d="M174 318c12-7 21-6 26-3 5-3 14-4 26 3-17 6-35 6-52 0zM178 320c11 15 33 15 44 0"/>
-                <path d="M181 282c-8 11-11 21-9 31M219 282c8 11 11 21 9 31" class="soft"/>
-                <path d="M174 382c2 28 0 54-8 86M226 382c-2 28 0 54 8 86"/>
-                <path d="M128 492c20-10 40-10 58-2M214 490c18-8 38-8 58 2" class="soft"/>
+              <svg viewBox="0 0 400 500" class="face__art" aria-hidden="true">
+                <defs>
+                  <linearGradient id="fSkin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7ECDD"/><stop offset="1" stop-color="#E7D0B3"/></linearGradient>
+                  <linearGradient id="fHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D2E4C"/><stop offset="1" stop-color="#0B1526"/></linearGradient>
+                  <linearGradient id="fTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E9DCC0"/><stop offset="1" stop-color="#C8AE82"/></linearGradient>
+                </defs>
+                <path fill="url(#fHair)" d="M200 40C120 40 80 100 84 182c4 76-10 156-18 238 34 22 84 18 104-6h60c20 24 70 28 104 6-8-82-22-162-18-238C320 100 280 40 200 40z"/>
+                <path fill="#DFC4A2" d="M172 330v100c16 14 40 14 56 0V330z"/>
+                <path fill="url(#fTop)" d="M66 500c8-46 52-66 106-72 14 12 42 12 56 0 54 6 98 26 106 72z"/>
+                <ellipse fill="#E9D3B6" cx="127" cy="224" rx="12" ry="22"/><ellipse fill="#E2C8A6" cx="273" cy="224" rx="12" ry="22"/>
+                <path fill="url(#fSkin)" d="M200 96c-52 0-74 46-74 102 0 66 20 124 50 158 10 11 18 16 24 16s14-5 24-16c30-34 50-92 50-158 0-56-22-102-74-102z"/>
+                <path fill="#D6B994" opacity=".38" d="M252 132c14 30 18 78 10 126-8 46-26 80-46 102 34-28 58-92 58-162 0-24-8-48-22-66z"/>
+                <path fill="url(#fHair)" d="M200 86c-56 0-88 40-82 106 14-42 46-70 94-76 28-3 52 10 68 42 8-48-24-72-80-72z"/>
+                <path fill="none" stroke="#2E4266" stroke-width="2" stroke-linecap="round" d="M160 98c-22 18-32 50-30 86M226 92c26 6 40 20 46 44M104 210c-4 70-12 140-24 196M296 210c4 70 12 140 24 196"/>
+                <g fill="none" stroke="#4A3A33" stroke-linecap="round">
+                  <path stroke-width="3.4" d="M152 186c14-9 30-9 40-3M208 183c10-6 26-6 40 3"/>
+                  <path stroke-width="2.4" d="M156 214c10 8 24 8 34 0M210 214c10 8 24 8 34 0"/>
+                  <path stroke-width="1.6" d="M160 218l-3 4M168 221l-2 4M176 222l-1 4M232 221l2 4M224 222l1 4M240 218l3 4"/>
+                </g>
+                <path fill="none" stroke="#B9967A" stroke-width="2" stroke-linecap="round" d="M198 224c-1 24-5 38-8 46 4 7 11 9 17 5"/>
+                <ellipse fill="#E5A491" opacity=".3" cx="160" cy="266" rx="18" ry="10"/><ellipse fill="#E5A491" opacity=".3" cx="240" cy="266" rx="18" ry="10"/>
+                <path fill="#C98477" d="M176 308c10-7 19-6 24-2 5-4 14-5 24 2-10 4-38 4-48 0z"/>
+                <path fill="#D49789" d="M177 309c10 16 36 16 46 0-10 4-36 4-46 0z"/>
+                <path fill="#fff" opacity=".3" d="M190 317c6 3 14 3 20 0-6 4-14 4-20 0z"/>
+                <circle fill="#D9C6A1" cx="125" cy="250" r="4.5"/>
               </svg>
               <div class="face__pins" role="group" aria-label="Regiões do rosto">
-                <button class="pin" style="left:50%;top:24%" data-zone="testa" aria-pressed="false"><span>Testa e expressão</span></button>
-                <button class="pin" style="left:43.2%;top:46.6%" data-zone="olheiras" aria-pressed="false"><span>Olheiras</span></button>
-                <button class="pin" style="left:50%;top:52.6%" data-zone="nariz" aria-pressed="false"><span>Nariz</span></button>
-                <button class="pin" style="left:60.5%;top:54%" data-zone="pele" aria-pressed="false"><span>Pele, poros e manchas</span></button>
-                <button class="pin" style="left:44.5%;top:59.6%" data-zone="sulco" aria-pressed="false"><span>Bigode chinês</span></button>
-                <button class="pin" style="left:50%;top:64.2%" data-zone="labios" aria-pressed="false"><span>Lábios</span></button>
-                <button class="pin" style="left:61.2%;top:66.4%" data-zone="mandibula" aria-pressed="false"><span>Contorno da mandíbula</span></button>
-                <button class="pin" style="left:50%;top:77.8%" data-zone="papada" aria-pressed="false"><span>Queixo e papada</span></button>
+                <button class="pin" style="left:50%;top:29%" data-zone="testa" aria-pressed="false"><span>Testa e expressão</span></button>
+                <button class="pin" style="left:43%;top:46.6%" data-zone="olheiras" aria-pressed="false"><span>Olheiras</span></button>
+                <button class="pin" style="left:50%;top:51%" data-zone="nariz" aria-pressed="false"><span>Nariz</span></button>
+                <button class="pin" style="left:60.5%;top:53.2%" data-zone="pele" aria-pressed="false"><span>Pele, poros e manchas</span></button>
+                <button class="pin" style="left:44.5%;top:58.4%" data-zone="sulco" aria-pressed="false"><span>Bigode chinês</span></button>
+                <button class="pin" style="left:50%;top:62.2%" data-zone="labios" aria-pressed="false"><span>Lábios</span></button>
+                <button class="pin" style="left:62.5%;top:63.6%" data-zone="mandibula" aria-pressed="false"><span>Contorno da mandíbula</span></button>
+                <button class="pin" style="left:50%;top:72.6%" data-zone="papada" aria-pressed="false"><span>Queixo e papada</span></button>
               </div>
             </div>
           </div>
           <!-- Sorriso -->
           <div class="pane" id="pane-sorriso" role="tabpanel" aria-labelledby="tab-sorriso" hidden>
             <div class="smile">
-              <svg viewBox="0 0 400 300" class="smile__svg" aria-hidden="true">
-                <path d="M56 142c40-30 92-46 122-38 12 4 18 8 22 8s10-4 22-8c30-8 82 8 122 38"/>
-                <path d="M56 142c52 84 236 84 288 0"/>
-                <path d="M82 144c66-16 170-16 236 0"/>
-                <path d="M82 144c56 50 180 50 236 0" class="soft"/>
-                <path d="M96 150c64 18 144 18 208 0"/>
-                <path d="M126 137v20M154 134v25M179 133v27M200 132v28M221 133v27M246 134v25M274 137v20"/>
-                <path d="M104 158c30 22 162 22 192 0" class="soft"/>
+              <svg viewBox="0 0 400 300" class="smile__art" aria-hidden="true">
+                <defs><linearGradient id="sLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CC8B7E"/><stop offset="1" stop-color="#B06E62"/></linearGradient></defs>
+                <circle cx="200" cy="150" r="134" fill="#EADFCB"/>
+                <path fill="url(#sLip)" d="M50 150C90 118 140 98 175 104c13 3 20 8 25 8s12-5 25-8c35-6 85 14 125 46-40 72-260 72-300 0z"/>
+                <path fill="#4A2730" d="M78 150c52-16 192-16 244 0-42 46-202 46-244 0z"/>
+                <path fill="#FBF8F2" d="M96 147c54-12 154-12 208 0l-6 16c-50 13-146 13-196 0z"/>
+                <path fill="none" stroke="#DDD0BC" stroke-width="1.6" d="M126 141v25M153 139v28M178 138v30M200 138v30M222 138v30M247 139v28M274 141v25"/>
+                <path fill="#EFE8DC" d="M122 178c40 12 116 12 156 0l-8 10c-36 9-104 9-140 0z"/>
+                <path fill="#fff" opacity=".3" d="M150 198c30 8 70 8 100 0-28 14-72 14-100 0z"/>
+                <path fill="#B8996A" d="M332 70l4 12 12 4-12 4-4 12-4-12-12-4 12-4zM74 96l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
               </svg>
             </div>
           </div>
           <!-- Saúde -->
           <div class="pane" id="pane-saude" role="tabpanel" aria-labelledby="tab-saude" hidden>
             <div class="health">
-              <svg viewBox="0 0 400 300" class="smile__svg" aria-hidden="true">
-                <path d="M200 250S70 180 70 100a65 65 0 0 1 130-12 65 65 0 0 1 130 12c0 80-130 150-130 150z"/>
-                <path d="M100 140h50l20-36 30 70 22-40h78" class="soft"/>
+              <svg viewBox="0 0 400 300" class="smile__art" aria-hidden="true">
+                <defs><linearGradient id="hG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EBDDC2"/><stop offset="1" stop-color="#B8996A"/></linearGradient></defs>
+                <circle cx="200" cy="150" r="134" fill="#EADFCB"/>
+                <path fill="url(#hG)" d="M200 252S84 188 84 114a60 60 0 0 1 116-24 60 60 0 0 1 116 24c0 74-116 138-116 138z"/>
+                <path fill="#fff" opacity=".35" d="M112 100c10-24 42-32 60-12-22-3-42 3-60 12z"/>
+                <path class="hpulse" fill="none" stroke="#0B1526" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" d="M104 152h52l16-32 24 58 18-38 12 12h70"/>
+                <path fill="#0B1526" d="M306 62h9V50h8v12h9v8h-9v12h-8V70h-9z"/>
+                <path fill="#B8996A" d="M90 214l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
               </svg>
             </div>
           </div>
@@ -450,7 +519,8 @@
   <section class="space" aria-labelledby="sp-title">
     <div class="wrap space__grid">
       <div class="space__copy">
-        <h2 class="h2" id="sp-title">Medicina e odontologia unidas em um espaço pensado para o seu conforto.</h2>
+        <h2 class="h2" id="sp-title">Um espaço pensado para o seu conforto.</h2>
+        <p class="muted space__lead">Medicina e odontologia unidas no mesmo endereço, na Mooca, com ambientes acolhedores e tecnologia atual.</p>
         <dl class="facts">
           <div><dt><span data-count="10">10</span>+</dt><dd>anos de experiência</dd></div>
           <div><dt><span data-count="1000">1.000</span>+</dt><dd>pacientes atendidos</dd></div>
@@ -461,11 +531,9 @@
           <p><strong>Visão.</strong> Ser referência em saúde e estética na Mooca, reconhecida pela excelência, confiança e inovação.</p>
         </div>
       </div>
-      <div class="space__gallery">
-        <figure class="g g1"><img src="assets/img/recepcao.webp" width="1199" height="1312" alt="Recepção da TCMO" loading="lazy"></figure>
-        <figure class="g g2"><img src="assets/img/sala.webp" width="1086" height="1448" alt="Sala de atendimento" loading="lazy"></figure>
-        <figure class="g g3"><img src="assets/img/consultorio.webp" width="1086" height="1448" alt="Consultório odontológico" loading="lazy"></figure>
-      </div>
+      <figure class="space__photo">
+        <img src="assets/img/sala.webp" width="1086" height="1448" alt="Sala de atendimento da TCMO com mesa de consulta, lustre de globos, painel ripado e cadeira de atendimento" loading="lazy">
+      </figure>
     </div>
   </section>
 

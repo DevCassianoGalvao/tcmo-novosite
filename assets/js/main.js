@@ -189,7 +189,7 @@
     renderChoices();
     if (focus) tab.focus();
     if (hasGsap && !reduce) {
-      gsap.from('#' + tab.getAttribute('aria-controls') + ' svg', { opacity: 0, scale: .96, duration: .6, ease: 'power3.out' });
+      gsap.from('#' + tab.getAttribute('aria-controls') + ' svg', { opacity: 0, scale: .94, y: 12, duration: .7, ease: 'power3.out' });
       gsap.from('#choices .choice', { opacity: 0, x: 16, stagger: .04, duration: .45, ease: 'power3.out' });
     }
   }
@@ -257,17 +257,28 @@
   // leve parallax do hero ao rolar
   gsap.to('.hero__window img', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
-  // Manifesto: palavras acendendo com o scroll
-  var man = $('[data-split]');
-  if (man) {
-    man.innerHTML = man.textContent.trim().split(/\s+/).map(function (w) { return '<span class="w">' + w + '</span>'; }).join(' ');
-    gsap.fromTo($$('.w', man), { opacity: .16 }, { opacity: 1, stagger: .06, ease: 'none', scrollTrigger: { trigger: man, start: 'top 82%', end: 'bottom 48%', scrub: true } });
+  // Brilho e profundidade no hero acompanhando o cursor (desktop)
+  if (window.matchMedia('(hover: hover) and (min-width: 901px)').matches) {
+    var hero = $('.hero'), glow = $('.hero__glow');
+    var gx = gsap.quickTo(glow, 'x', { duration: .8, ease: 'power3' }), gy = gsap.quickTo(glow, 'y', { duration: .8, ease: 'power3' });
+    var fx = gsap.quickTo('.hero__frame', 'xPercent', { duration: 1.2, ease: 'power3' }), fy = gsap.quickTo('.hero__frame', 'yPercent', { duration: 1.2, ease: 'power3' });
+    var wx = gsap.quickTo('.hero__window', 'xPercent', { duration: 1.2, ease: 'power3' }), wy = gsap.quickTo('.hero__window', 'yPercent', { duration: 1.2, ease: 'power3' });
+    hero.addEventListener('pointermove', function (e) {
+      var r = hero.getBoundingClientRect();
+      gx(e.clientX - r.left); gy(e.clientY - r.top);
+      var nx = (e.clientX / r.width - .5), ny = (e.clientY / r.height - .5);
+      fx(nx * 2.4); fy(ny * 2.4); wx(nx * -1); wy(ny * -1);
+    });
   }
 
-  // Parallax suave em imagens
-  $$('[data-parallax] img').forEach(function (img) {
-    gsap.fromTo(img, { yPercent: -14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
-  });
+  // Ilustração de cuidado integrado: anéis se desenhando
+  var rings = $$('.venn__rings circle');
+  rings.forEach(function (c) { var L = c.getTotalLength(); c.style.strokeDasharray = L; c.style.strokeDashoffset = L; });
+  var vt = gsap.timeline({ scrollTrigger: { trigger: '.about__art', start: 'top 75%', once: true } });
+  vt.to(rings, { strokeDashoffset: 0, duration: 1.8, stagger: .25, ease: 'power2.inOut' })
+    .from('.venn__rings circle', { fillOpacity: 0, duration: 1, stagger: .2 }, .6)
+    .from('.venn__labels text', { opacity: 0, y: 8, stagger: .15, duration: .8, ease: 'power3.out' }, 1)
+    .from('.venn__logo', { opacity: 0, scale: .6, transformOrigin: '50% 50%', duration: 1, ease: 'back.out(2)' }, 1.4);
 
   // Ícones dos diferenciais
   ScrollTrigger.batch('.values li', { start: 'top 88%', once: true, onEnter: function (b) { gsap.from(b, { opacity: 0, y: 20, stagger: .08, duration: .9, ease: 'power3.out' }); } });
@@ -282,17 +293,36 @@
     });
   });
 
-  // Ilustração de perfil desenhando
-  var draws = $$('.profile .draw');
-  draws.forEach(function (p) { var L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
-  gsap.to(draws, { strokeDashoffset: 0, duration: 2.4, stagger: .15, ease: 'power2.inOut', scrollTrigger: { trigger: '.profile', start: 'top 75%', once: true } });
-  gsap.from('.profile .guides', { opacity: 0, duration: 1.5, delay: .8, scrollTrigger: { trigger: '.profile', start: 'top 75%', once: true } });
+  // Ilustrações de linha se desenhando
+  $$('svg.illus').forEach(function (svg) {
+    var d = $$('.draw', svg);
+    d.forEach(function (p) { var L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+    var t = gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 78%', once: true } });
+    t.to(d, { strokeDashoffset: 0, duration: 2.2, stagger: .08, ease: 'power2.inOut' })
+     .from($$('.guides', svg), { opacity: 0, duration: 1.4 }, .6);
+  });
 
-  // CO2 Laser
+  // CO2 Laser: entrada + ciclo do feixe fracionado
   var lt = gsap.timeline({ scrollTrigger: { trigger: '.laser', start: 'top 65%', once: true } });
-  lt.from('.laser__photo', { clipPath: 'inset(0 0 100% 0 round 56px)', duration: 1.4, ease: 'expo.inOut' })
-    .from('.laser__title', { yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out' }, 0.3)
-    .from('.laser .benefits li', { opacity: 0, x: 24, stagger: .1, duration: .8, ease: 'power3.out' }, 0.6);
+  lt.from('.laser__title', { yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out' }, 0.2)
+    .from('.laser .benefits li', { opacity: 0, x: 24, stagger: .1, duration: .8, ease: 'power3.out' }, 0.5)
+    .from('.laser-illus .lbls', { opacity: 0, duration: 1 }, 1.6);
+  var loop = gsap.timeline({ repeat: -1, repeatDelay: .6, paused: true });
+  loop.set('.laser-illus .mcol', { scaleY: 0 })
+    .set('.laser-illus .mdot', { opacity: 0, scale: .4, transformOrigin: '50% 50%' })
+    .to('.laser-illus .hp', { y: 10, duration: .5, ease: 'power2.inOut' })
+    .fromTo('.laser-illus .beam', { opacity: 0 }, { opacity: 1, duration: .25, ease: 'none' })
+    .to('.laser-illus .mdot', { opacity: 1, scale: 1, duration: .3, stagger: { each: .06, from: 'center' }, ease: 'back.out(3)' }, '<')
+    .to('.laser-illus .mcol', { scaleY: 1, duration: .9, stagger: { each: .06, from: 'center' }, ease: 'power3.out' }, '<.1')
+    .to('.laser-illus .beam', { opacity: .35, duration: .15, repeat: 5, yoyo: true, ease: 'none' }, '<')
+    .to('.laser-illus .beam', { opacity: 0, duration: .4 })
+    .to('.laser-illus .hp', { y: 0, duration: .6, ease: 'power2.inOut' }, '<')
+    .to('.laser-illus .fibers path', { opacity: 1, stroke: '#EFE3C8', duration: .5, stagger: .1 }, '<')
+    .to('.laser-illus .fibers path', { opacity: .7, stroke: '#D9C6A1', duration: .8, stagger: .1 })
+    .to({}, { duration: 1.4 })
+    .to('.laser-illus .mcol', { opacity: 0, duration: .6 })
+    .set('.laser-illus .mcol', { opacity: 1 });
+  ScrollTrigger.create({ trigger: '.laser__art', start: 'top 85%', end: 'bottom 10%', onToggle: function (self) { self.isActive ? loop.play() : loop.pause(); } });
 
   // Dica de arraste no comparador
   ScrollTrigger.create({ trigger: '#compare', start: 'top 70%', once: true, onEnter: function () {
@@ -320,8 +350,9 @@
     ScrollTrigger.create({ trigger: el, start: 'top 88%', once: true, onEnter: function () { countUp(el); } });
   });
 
-  // Galeria da estrutura
-  ScrollTrigger.batch('.g', { start: 'top 85%', once: true, onEnter: function (b) { gsap.from(b, { clipPath: 'inset(100% 0 0 0 round 40px)', stagger: .12, duration: 1.3, ease: 'expo.inOut' }); } });
+  // Foto da estrutura: revelação + parallax
+  gsap.from('.space__photo', { clipPath: 'inset(100% 0% 0% 0% round 48px)', duration: 1.4, ease: 'expo.inOut', scrollTrigger: { trigger: '.space__photo', start: 'top 80%', once: true } });
+  gsap.fromTo('.space__photo img', { yPercent: -10 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.space__photo', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   window.addEventListener('load', function () { ScrollTrigger.refresh(); });
 })();
