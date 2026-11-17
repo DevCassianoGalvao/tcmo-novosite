@@ -11,8 +11,8 @@ Site estático (HTML, CSS e JS) publicado na Vercel, com uma função serverless
 1. No Brevo, crie uma chave em **Settings → SMTP & API → API Keys** (chave de API v3, não a chave SMTP).
 2. Em **Senders & IP**, adicione e verifique o remetente (ex.: `site@tcmo.com.br`). Para melhor entrega, autentique o domínio (DKIM/DMARC).
 3. Na Vercel, em **Settings → Environment Variables**, cadastre as variáveis do `.env.example`:
-   - `BREVO_API_KEY`, `CLINIC_EMAIL`, `SENDER_EMAIL` (obrigatórias)
-   - `SENDER_NAME`, `CLINIC_EMAIL_CC`, `BREVO_LIST_ID`, `ALLOWED_ORIGINS` (opcionais)
+   - `BREVO_API_KEY` e `SENDER_EMAIL` (obrigatórias)
+   - `CLINIC_EMAIL` (padrão: admtcmo@outlook.com), `SENDER_NAME`, `CLINIC_EMAIL_CC`, `BREVO_LIST_ID`, `ALLOWED_ORIGINS` (opcionais)
 4. Faça um novo deploy (Deployments → Redeploy) para as variáveis valerem.
 
 Sem as variáveis, a rota responde 503 e o site continua funcionando normalmente: o formulário só abre o WhatsApp.

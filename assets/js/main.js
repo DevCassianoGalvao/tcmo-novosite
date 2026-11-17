@@ -87,7 +87,7 @@
         }
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['clinica', 'tratamentos', 'pre-avaliacao', 'especialistas', 'resultados', 'contato'].forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+    ['clinica', 'tratamentos', 'tecnologias', 'pre-avaliacao', 'especialistas', 'resultados', 'contato'].forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
   }
 
   /* ---------- Comparador antes/depois ---------- */
@@ -273,6 +273,16 @@
         e.preventDefault();
         selectTech(techTabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + techTabs.length) % techTabs.length], true);
       }
+    });
+  });
+
+  /* ---------- Avaliações: setas do carrossel ---------- */
+  var track = $('.reviews__track');
+  $$('.rv-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var card = track.querySelector('.rv');
+      var step = card ? card.getBoundingClientRect().width + 16 : 300;
+      track.scrollBy({ left: step * parseInt(b.getAttribute('data-dir'), 10), behavior: reduce ? 'auto' : 'smooth' });
     });
   });
 

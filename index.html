@@ -75,6 +75,7 @@
     <symbol id="i-wa" viewBox="0 0 32 32"><path d="M5 27.5l1.7-5.6A11.5 11.5 0 1 1 10.5 26z"/><path fill="currentColor" stroke="none" d="M12.5 9.4c-.5 0-1.3.2-1.9.9-.6.7-1.3 1.6-1.3 3.4 0 3.7 5 9.8 10.8 9.8 1.6 0 2.7-.6 3.3-1.3.5-.6.7-1.4.5-1.9-.1-.3-2.5-1.5-3-1.6-.5-.2-.8 0-1.1.4-.3.5-.9 1.1-1.1 1.3-.3.2-.6.1-1-.1-2-1-3.4-2.4-4-3.7-.2-.4 0-.6.2-.8.3-.3.5-.6.7-.9.2-.3.1-.6 0-.8-.1-.3-1-2.6-1.4-3.3-.2-.5-.5-.5-.8-.5z"/></symbol>
     <symbol id="i-ig" viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="22" rx="6.5"/><circle cx="16" cy="16" r="5"/><circle cx="22.5" cy="9.5" r=".9" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-cal" viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="3.5"/><path d="M5 13h22M11 4v5M21 4v5M10.5 18h3M15 18h3M19.5 18h3M10.5 22.5h3M15 22.5h3"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
     <symbol id="i-check" viewBox="0 0 32 32"><path d="M7 16.5l6 6L25 10"/></symbol>
     <symbol id="i-plus" viewBox="0 0 32 32"><path d="M16 8v16M8 16h16"/></symbol>
     <symbol id="i-drag" viewBox="0 0 32 32"><path d="M12 10l-6 6 6 6M20 10l6 6-6 6"/></symbol>
@@ -137,7 +138,7 @@
           </a>
           <a class="btn btn--ghost" href="#pre-avaliacao">Descobrir meu tratamento</a>
         </div>
-        <p class="hero__proof" data-hero>Centenas de pacientes atendidos com carinho e cuidado.</p>
+        <a class="hero__proof" href="#avaliacoes" data-hero><span class="stars" aria-hidden="true"><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg><svg class="star"><use href="#i-star"/></svg></span>Nota 4,8 no Google, com 82 avaliações de pacientes</a>
       </div>
 
       <div class="hero__visual">
@@ -312,6 +313,7 @@
         <p class="muted">Estrutura e equipe preparadas para procedimentos com segurança, conforto e acompanhamento de perto, do planejamento ao pós-operatório.</p>
       </div>
       <div class="surgery__grid">
+        <figure class="sg sg0"><img src="assets/img/centro-cirurgico.webp" width="900" height="1600" alt="Sala do centro cirúrgico da TCMO com maca, foco cirúrgico e monitor" loading="lazy"></figure>
         <figure class="sg sg1"><img src="assets/img/cirurgia-dra-larissa.webp" width="900" height="1350" alt="Dra. Larissa Torres operando sob o foco cirúrgico" loading="lazy"></figure>
         <figure class="sg sg2"><img src="assets/img/cirurgia-perfil.webp" width="900" height="1350" alt="Cirurgiã da TCMO com lupa cirúrgica e touca TCMO" loading="lazy"></figure>
         <figure class="sg sg3"><img src="assets/img/cirurgia-detalhe.webp" width="900" height="1350" alt="Cirurgiã realizando procedimento facial com iluminação de precisão" loading="lazy"></figure>
@@ -582,6 +584,44 @@
         <div class="compare__line" aria-hidden="true"><span class="compare__knob"><svg class="ico"><use href="#i-drag"/></svg></span></div>
         <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois">
       </div>
+    </div>
+  </section>
+
+  <!-- AVALIAÇÕES -->
+  <section class="reviews" id="avaliacoes" aria-labelledby="rv-title">
+    <div class="wrap reviews__grid">
+      <div class="reviews__score">
+        <h2 class="h2" id="rv-title">O que dizem nossos pacientes.</h2>
+        <div class="score">
+          <span class="score__n">4,8</span>
+          <div class="score__meta">
+            <span class="stars stars--lg" aria-label="Nota 4,8 de 5"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></span>
+            <span class="score__t">82 avaliações no Google</span>
+          </div>
+        </div>
+        <div class="reviews__actions">
+          <a class="btn btn--ghost" href="https://share.google/a9YrznUyoOBqgZWMl" target="_blank" rel="noopener">Ver todas no Google</a>
+          <a class="link" href="https://share.google/a9YrznUyoOBqgZWMl" target="_blank" rel="noopener">Deixar minha avaliação</a>
+        </div>
+        <div class="reviews__nav">
+          <button type="button" class="rv-btn" data-dir="-1" aria-label="Avaliação anterior"><svg class="ico" aria-hidden="true"><use href="#i-drag"/></svg></button>
+          <button type="button" class="rv-btn" data-dir="1" aria-label="Próxima avaliação"><svg class="ico" aria-hidden="true"><use href="#i-drag"/></svg></button>
+        </div>
+      </div>
+      <ul class="reviews__track" role="list" tabindex="0" aria-label="Avaliações de pacientes no Google">
+          <li class="rv"><blockquote><p>“Excelente profissional! Desde o atendimento até a qualidade do serviço, tudo é impecável. Um dentista atencioso, cuidadoso e muito competente, que transmite confiança e demonstra preocupação genuína com o bem-estar e a satisfação dos pacientes.”</p></blockquote>
+            <footer class="rv__by"><span class="stars" aria-label="5 de 5 estrelas"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></span><span><strong>Jéssica M.</strong> no Google</span></footer></li>
+          <li class="rv"><blockquote><p>“Realizei minha cirurgia de castanhares com a Dra Larissa, profissional excelente, tirou todas as minhas dúvidas, caprichosa em cada detalhe, o resultado ficou incrível. Trabalho impecável!”</p></blockquote>
+            <footer class="rv__by"><span class="stars" aria-label="5 de 5 estrelas"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></span><span><strong>Sara C.</strong> no Google</span></footer></li>
+          <li class="rv"><blockquote><p>“Ótimo atendimento e estrutura de primeira qualidade / Dr Luan muito prestativo”</p></blockquote>
+            <footer class="rv__by"><span class="stars" aria-label="5 de 5 estrelas"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></span><span><strong>Rodrigo N.</strong> no Google</span></footer></li>
+          <li class="rv"><blockquote><p>“Estou no início do tratamento, mas desde o primeiro atendimento fui muito bem recebido. Equipe atenciosa, organizada e profissional. Até o momento, minha experiência tem sido excelente!”</p></blockquote>
+            <footer class="rv__by"><span class="stars" aria-label="5 de 5 estrelas"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></span><span><strong>Éder S.</strong> no Google</span></footer></li>
+          <li class="rv"><blockquote><p>“Ambiente agradável e moderno. Gostei muito do atendimento desde a recepção e a Dra também. Que Deus continue abençoando e prosperando o caminho de vocês. Recomendo muito essa clínica.”</p></blockquote>
+            <footer class="rv__by"><span class="stars" aria-label="5 de 5 estrelas"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></span><span><strong>Salah M.</strong> no Google</span></footer></li>
+          <li class="rv"><blockquote><p>“Perfeita!! Tirou todas as minha cáries e desconforto!! Atendimento maravilhoso e espaço aconchegante”</p></blockquote>
+            <footer class="rv__by"><span class="stars" aria-label="5 de 5 estrelas"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></span><span><strong>Nicole U.</strong> no Google</span></footer></li>
+      </ul>
     </div>
   </section>
 

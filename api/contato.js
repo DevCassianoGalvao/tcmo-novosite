@@ -5,7 +5,7 @@
  *
  * Variáveis de ambiente (Vercel → Settings → Environment Variables):
  *   BREVO_API_KEY      chave v3 do Brevo (Settings → SMTP & API → API Keys)        [obrigatória]
- *   CLINIC_EMAIL       e-mail da clínica que recebe as avaliações                   [obrigatória]
+ *   CLINIC_EMAIL       e-mail que recebe os leads (padrão: admtcmo@outlook.com)    [opcional]
  *   SENDER_EMAIL       remetente verificado no Brevo (ex.: site@tcmo.com.br)        [obrigatória]
  *   SENDER_NAME        nome do remetente (padrão: "Site TCMO")                       [opcional]
  *   CLINIC_EMAIL_CC    cópias, separadas por vírgula                                 [opcional]
@@ -15,6 +15,8 @@
  */
 
 const BREVO = 'https://api.brevo.com/v3';
+// Caixa que recebe os leads do site (pode ser trocada pela variável CLINIC_EMAIL).
+const DEFAULT_CLINIC_EMAIL = 'admtcmo@outlook.com';
 
 const LIMITS = { nome: 120, telefone: 40, email: 160, interesse: 160, mensagem: 2000, item: 120, itens: 30 };
 
@@ -117,8 +119,9 @@ module.exports = async function handler(req, res) {
     return res.status(403).json({ ok: false, error: 'Origem não permitida.' });
   }
 
-  const { BREVO_API_KEY, CLINIC_EMAIL, SENDER_EMAIL } = process.env;
-  if (!BREVO_API_KEY || !CLINIC_EMAIL || !SENDER_EMAIL) {
+  const { BREVO_API_KEY, SENDER_EMAIL } = process.env;
+  const CLINIC_EMAIL = process.env.CLINIC_EMAIL || DEFAULT_CLINIC_EMAIL;
+  if (!BREVO_API_KEY || !SENDER_EMAIL) {
     return res.status(503).json({ ok: false, error: 'Envio por e-mail ainda não configurado.' });
   }
 
