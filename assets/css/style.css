@@ -248,6 +248,8 @@ h1,h2,h3{margin:0;font-weight:inherit}
 .plan__list button .ico{width:14px;height:14px;stroke-width:2}
 .plan__empty{color:var(--muted);font-size:15px}
 .plan .btn{align-self:flex-start;background:var(--gold-grad);color:var(--navy)}
+.plan__status{font-size:14px;line-height:1.5;color:var(--champ)}
+.plan__status.is-bad{color:#F0B4A4}
 .plan__note{font-size:13px;color:var(--muted);line-height:1.5}
 
 .field{display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--muted)}

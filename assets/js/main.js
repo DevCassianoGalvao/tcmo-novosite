@@ -14,7 +14,7 @@
   function waLink(text) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); }
 
   /* Envia os dados para o e-mail da clínica (Brevo, via /api/contato).
-     Roda em segundo plano: se a API ainda não estiver configurada, o WhatsApp segue funcionando. */
+     Retorna uma Promise<boolean>: true quando o e-mail foi aceito pela API. */
   function sendLead(data) {
     data.pagina = location.href;
     try {
@@ -216,16 +216,25 @@
     });
   });
 
+  var statusEl = $('#plan-status'), sendLabel = $('#plan-send-label');
+  function planStatus(msg, bad) { statusEl.textContent = msg; statusEl.classList.toggle('is-bad', !!bad); statusEl.hidden = false; }
+
   sendBtn.addEventListener('click', function () {
-    var name = nameEl.value.trim();
-    var groups = {};
-    Object.keys(picked).forEach(function (id) { var a = picked[id].area; (groups[a] = groups[a] || []).push(picked[id].t); });
-    var msg = 'Olá! ' + (name ? 'Sou ' + name + '. ' : '') + 'Montei minha pré-avaliação no site da TCMO e gostaria de agendar uma avaliação.\n';
-    ['rosto', 'sorriso', 'saude'].forEach(function (k) { if (groups[k]) msg += '\n' + DATA[k].label + ': ' + groups[k].join(', '); });
-    window.open(waLink(msg), '_blank', 'noopener');
+    var name = nameEl.value.trim(), tel = ($('#plan-tel').value || '').trim();
+    if (!name) { planStatus('Informe seu nome para enviarmos a pré-avaliação.', true); nameEl.focus(); return; }
+    if (tel.replace(/\D/g, '').length < 10) { planStatus('Informe seu WhatsApp com DDD para a equipe retornar.', true); $('#plan-tel').focus(); return; }
+    sendBtn.disabled = true; sendLabel.textContent = 'Enviando...'; statusEl.hidden = true;
     sendLead({
-      tipo: 'pre-avaliacao', nome: name || 'Não informado', telefone: ($('#plan-tel').value || '').trim(),
+      tipo: 'pre-avaliacao', nome: name, telefone: tel,
       selecoes: Object.keys(picked).map(function (id) { return { area: DATA[picked[id].area].label, item: picked[id].t }; })
+    }).then(function (ok) {
+      sendLabel.textContent = 'Enviar pré-avaliação';
+      if (ok) {
+        planStatus('Pré-avaliação enviada. Nossa equipe entra em contato em breve pelo seu WhatsApp.');
+      } else {
+        sendBtn.disabled = Object.keys(picked).length === 0;
+        planStatus('Não conseguimos enviar agora. Tente de novo em instantes ou fale com a gente pelo WhatsApp (11) 96643-2515.', true);
+      }
     });
   });
 
@@ -233,21 +242,29 @@
 
   /* ---------- Formulário de contato ---------- */
   var form = $('#contact-form'), err = $('#form-error');
+  var formBtn = $('#form-send'), formOk = $('#form-ok'), formLabel = formBtn.querySelector('span');
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var d = new FormData(form);
-    var nome = (d.get('nome') || '').trim();
-    if (!nome) { err.hidden = false; form.nome.focus(); return; }
+    var nome = (d.get('nome') || '').trim(), tel = (d.get('tel') || '').trim();
+    formOk.hidden = true;
+    if (!nome || tel.replace(/\D/g, '').length < 10) {
+      err.textContent = 'Informe seu nome e seu WhatsApp com DDD para enviarmos a mensagem.';
+      err.hidden = false; (!nome ? form.nome : form.tel).focus(); return;
+    }
     err.hidden = true;
-    var msg = 'Olá! Meu nome é ' + nome + '.\nTenho interesse em: ' + d.get('interesse') + '.';
-    if ((d.get('tel') || '').trim()) msg += '\nTelefone: ' + d.get('tel').trim();
-    if ((d.get('msg') || '').trim()) msg += '\n\n' + d.get('msg').trim();
-    window.open(waLink(msg), '_blank', 'noopener');
+    formBtn.disabled = true; formLabel.textContent = 'Enviando...';
     sendLead({
-      tipo: 'contato', nome: nome, telefone: (d.get('tel') || '').trim(), email: (d.get('email') || '').trim(),
+      tipo: 'contato', nome: nome, telefone: tel, email: (d.get('email') || '').trim(),
       interesse: d.get('interesse'), mensagem: (d.get('msg') || '').trim(), empresa: d.get('empresa') || ''
+    }).then(function (ok) {
+      formBtn.disabled = false; formLabel.textContent = 'Enviar mensagem';
+      if (ok) { formOk.hidden = false; form.reset(); }
+      else {
+        err.textContent = 'Não conseguimos enviar agora. Tente de novo em instantes ou fale com a gente pelo WhatsApp (11) 96643-2515.';
+        err.hidden = false;
+      }
     });
-    $('#form-ok').hidden = false;
   });
 
   /* ---------- Tecnologias: abas ---------- */

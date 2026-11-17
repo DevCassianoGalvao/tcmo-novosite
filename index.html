@@ -515,8 +515,9 @@
               <input type="tel" id="plan-tel" autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000">
             </label>
             <button class="btn btn--navy" id="plan-send" type="button" disabled>
-              <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Enviar pelo WhatsApp
+              <svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span id="plan-send-label">Enviar pré-avaliação</span>
             </button>
+            <p class="plan__status" id="plan-status" role="status" aria-live="polite" hidden></p>
             <p class="plan__note">Esta lista não substitui a consulta. A indicação de qualquer tratamento é feita pelo especialista na avaliação presencial.</p>
           </div>
         </div>
@@ -698,7 +699,7 @@
     <div class="wrap contact__grid">
       <div class="contact__copy">
         <h2 class="h2" id="ct-title">Agende sua avaliação.</h2>
-        <p class="muted">Atendimento prático e acolhedor para você e toda a sua família. Preencha e a sua mensagem abre pronta no WhatsApp.</p>
+        <p class="muted">Atendimento prático e acolhedor para você e toda a sua família. Preencha e nossa equipe retorna pelo seu WhatsApp.</p>
         <form class="form" id="contact-form" novalidate>
           <label class="field"><span>Nome</span><input name="nome" type="text" autocomplete="name" required></label>
           <label class="field"><span>WhatsApp</span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000"></label>
@@ -716,9 +717,9 @@
             </select>
           </label>
           <label class="field field--full"><span>Mensagem</span><textarea name="msg" rows="3"></textarea></label>
-          <p class="form__error" id="form-error" role="alert" hidden>Informe seu nome para enviarmos a mensagem.</p>
-          <p class="form__ok" id="form-ok" role="status" hidden>Recebemos seus dados. A conversa continua no WhatsApp, que abriu em outra aba.</p>
-          <button class="btn btn--gold" type="submit"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Enviar pelo WhatsApp</button>
+          <p class="form__error" id="form-error" role="alert" hidden>Informe seu nome e seu WhatsApp para enviarmos a mensagem.</p>
+          <p class="form__ok" id="form-ok" role="status" hidden>Mensagem enviada. Nossa equipe entra em contato em breve pelo seu WhatsApp.</p>
+          <button class="btn btn--gold" type="submit" id="form-send"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Enviar mensagem</span></button>
         </form>
       </div>
       <div class="contact__info">
