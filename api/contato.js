@@ -6,7 +6,7 @@
  * Variáveis de ambiente (Vercel → Settings → Environment Variables):
  *   BREVO_API_KEY      chave v3 do Brevo (Settings → SMTP & API → API Keys)        [obrigatória]
  *   CLINIC_EMAIL       e-mail que recebe os leads (padrão: admtcmo@outlook.com)    [opcional]
- *   SENDER_EMAIL       remetente verificado no Brevo (ex.: site@tcmo.com.br)        [obrigatória]
+ *   SENDER_EMAIL       remetente verificado no Brevo (ex.: noreply@tcmo.com.br)    [obrigatória]
  *   SENDER_NAME        nome do remetente (padrão: "Site TCMO")                       [opcional]
  *   CLINIC_EMAIL_CC    cópias, separadas por vírgula                                 [opcional]
  *   BREVO_LIST_ID      ID de lista para salvar o contato quando houver e-mail       [opcional]
