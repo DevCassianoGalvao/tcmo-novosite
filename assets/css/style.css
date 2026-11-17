@@ -69,7 +69,9 @@ h1,h2,h3{margin:0;font-weight:inherit}
 .btn--ghost:hover{box-shadow:inset 0 0 0 1px var(--champ);color:var(--white)}
 .btn--navy{background:var(--navy);color:var(--cream)}
 .btn--navy:hover:not(:disabled){background:var(--navy-3)}
-.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+.btn--gold:disabled::after{display:none}
+.btn--gold:disabled:hover{box-shadow:0 10px 30px -12px rgba(217,198,161,.55),inset 0 1px 0 rgba(255,255,255,.5)}
 
 .link{display:inline-flex;align-items:center;gap:10px;color:var(--champ);text-decoration:none;font-weight:500;font-size:15.5px;padding-bottom:4px;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;transition:background-size .4s var(--ease)}
 .link:hover{background-size:40% 1px}
@@ -247,7 +249,7 @@ h1,h2,h3{margin:0;font-weight:inherit}
 .plan__list button{width:22px;height:22px;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;color:var(--champ);padding:0}
 .plan__list button .ico{width:14px;height:14px;stroke-width:2}
 .plan__empty{color:var(--muted);font-size:15px}
-.plan .btn{align-self:flex-start;background:var(--gold-grad);color:var(--navy)}
+.plan .btn{align-self:flex-start}
 .plan__status{font-size:14px;line-height:1.5;color:var(--champ)}
 .plan__status.is-bad{color:#F0B4A4}
 .plan__note{font-size:13px;color:var(--muted);line-height:1.5}
