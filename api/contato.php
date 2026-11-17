@@ -49,43 +49,84 @@ function esc($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 function is_email($e) { return (bool)preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/', $e); }
 function row($label, $value) {
   if ($value === '' || $value === null) return '';
-  return '<tr><td style="padding:10px 16px;color:#6B7385;font:14px Arial,sans-serif;vertical-align:top;width:150px">' . esc($label) .
-    '</td><td style="padding:10px 16px;color:#0B1526;font:15px Arial,sans-serif">' . $value . '</td></tr>';
+  return '<tr><td style="padding:14px 0;border-bottom:1px solid #EFE8DB">' .
+    '<div style="color:#8A8F9C;font:13px Arial,sans-serif;margin:0 0 4px">' . esc($label) . '</div>' .
+    '<div style="color:#0B1526;font:16px/1.45 Arial,sans-serif">' . $value . '</div></td></tr>';
+}
+
+function lista_pt($itens) {
+  $n = count($itens);
+  if ($n <= 1) return implode('', $itens);
+  return implode(', ', array_slice($itens, 0, $n - 1)) . ' e ' . $itens[$n - 1];
+}
+
+function wa_message($d) {
+  $primeiro = explode(' ', $d['nome'])[0];
+  if ($d['tipo'] === 'pre-avaliacao') {
+    $itens = array_map(function ($s) { return mb_strtolower($s['item'], 'UTF-8'); }, $d['selecoes']);
+    $sobre = 'a sua pré-avaliação pelo site, com interesse em ' . lista_pt($itens);
+  } else {
+    $sobre = 'a sua mensagem pelo site' . ($d['interesse'] ? ' sobre ' . mb_strtolower($d['interesse'], 'UTF-8') : '');
+  }
+  return 'Olá, ' . $primeiro . '! Aqui é da TCMO Clínica Integrada. Recebemos ' . $sobre .
+    '. Vamos agendar a sua avaliação? Qual o melhor dia e horário para você?';
 }
 
 function build_email($d) {
   $origem = $d['tipo'] === 'pre-avaliacao' ? 'Pré-avaliação do site' : 'Formulário de contato do site';
   $zap = preg_replace('/\D/', '', $d['telefone']);
-  $zapLink = strlen($zap) >= 10 ? 'https://wa.me/' . (strpos($zap, '55') === 0 ? $zap : '55' . $zap) : '';
+  $waMsg = wa_message($d);
+  $zapLink = strlen($zap) >= 10 ? 'https://wa.me/' . (strpos($zap, '55') === 0 ? $zap : '55' . $zap) . '?text=' . rawurlencode($waMsg) : '';
+  $primeiro = explode(' ', $d['nome'])[0];
 
   $selHtml = ''; $selTxt = '';
   if ($d['selecoes']) {
     $g = [];
     foreach ($d['selecoes'] as $s) $g[$s['area']][] = $s['item'];
     foreach ($g as $area => $itens) {
-      $selHtml .= '<p style="margin:0 0 6px"><strong>' . esc($area) . ':</strong> ' . implode(', ', array_map('esc', $itens)) . '</p>';
+      $selHtml .= '<div style="margin:0 0 6px"><strong>' . esc($area) . ':</strong> ' . implode(', ', array_map('esc', $itens)) . '</div>';
       $selTxt .= ($selTxt ? "\n" : '') . $area . ': ' . implode(', ', $itens);
     }
   }
 
-  $tel = '';
-  if ($d['telefone']) $tel = $zapLink ? '<a href="' . $zapLink . '" style="color:#0B1526">' . esc($d['telefone']) . '</a>' : esc($d['telefone']);
+  $intro = $d['tipo'] === 'pre-avaliacao'
+    ? esc($primeiro) . ' montou uma pré-avaliação no site e quer agendar uma avaliação.'
+    : esc($primeiro) . ' enviou uma mensagem pelo site.';
+
+  $botao = '';
+  if ($zapLink) {
+    $botao = '<tr><td style="padding:4px 28px 8px">' .
+      '<p style="margin:0 0 16px;color:#0B1526;font:16px/1.5 Arial,sans-serif">' . $intro . ' Toque no botão para abrir a conversa no WhatsApp com a mensagem já escrita.</p>' .
+      '<table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr><td align="center" bgcolor="#25D366" style="border-radius:999px">' .
+      '<a href="' . esc($zapLink) . '" style="display:block;padding:16px 24px;color:#ffffff;font:bold 16px Arial,sans-serif;text-decoration:none;border-radius:999px">Chamar ' . esc($primeiro) . ' no WhatsApp</a>' .
+      '</td></tr></table>' .
+      '<p style="margin:14px 0 0;padding:14px 16px;background:#F7F3EC;border-radius:12px;color:#4A5160;font:14px/1.5 Arial,sans-serif">' .
+      '<span style="display:block;color:#8A8F9C;font-size:12px;margin-bottom:4px">Mensagem que vai abrir:</span>' . esc($waMsg) . '</p>' .
+      '</td></tr>';
+  } else {
+    $botao = '<tr><td style="padding:4px 28px 8px"><p style="margin:0;color:#0B1526;font:16px/1.5 Arial,sans-serif">' . $intro . '</p></td></tr>';
+  }
+
   $mail = $d['email'] ? '<a href="mailto:' . esc($d['email']) . '" style="color:#0B1526">' . esc($d['email']) . '</a>' : '';
 
-  $html = '<!doctype html><html><body style="margin:0;background:#F3ECDF;padding:24px">' .
-    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden">' .
-    '<tr><td style="background:#0B1526;padding:22px 24px;color:#D9C6A1;font:20px Georgia,serif">TCMO Clínica Integrada' .
+  $html = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head>' .
+    '<body style="margin:0;background:#F3ECDF;padding:16px">' .
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden">' .
+    '<tr><td style="background:#0B1526;padding:22px 28px;color:#D9C6A1;font:22px Georgia,serif">TCMO Clínica Integrada' .
     '<div style="color:#A9B2C3;font:13px Arial,sans-serif;margin-top:4px">' . esc($origem) . '</div></td></tr>' .
-    '<tr><td style="padding:8px 8px 0"><table role="presentation" cellpadding="0" cellspacing="0" width="100%">' .
-    row('Nome', esc($d['nome'])) . row('WhatsApp', $tel) . row('E-mail', $mail) .
+    '<tr><td style="height:20px"></td></tr>' . $botao .
+    '<tr><td style="padding:8px 28px 0"><table role="presentation" cellpadding="0" cellspacing="0" width="100%">' .
+    row('Nome', esc($d['nome'])) . row('WhatsApp', esc($d['telefone'])) . row('E-mail', $mail) .
     row('Interesse', esc($d['interesse'])) . row('O que marcou', $selHtml) .
     row('Mensagem', $d['mensagem'] ? nl2br(esc($d['mensagem'])) : '') .
     '</table></td></tr>' .
-    '<tr><td style="padding:16px 24px 24px;color:#6B7385;font:12px Arial,sans-serif">Enviado pelo site em ' . esc($d['quando']) .
+    '<tr><td style="padding:18px 28px 26px;color:#8A8F9C;font:12px Arial,sans-serif">Enviado pelo site em ' . esc($d['quando']) .
     ($d['pagina'] ? ' a partir de ' . esc($d['pagina']) : '') . '.</td></tr></table></body></html>';
 
   $text = implode("\n", array_filter([
     'TCMO Clínica Integrada | ' . $origem, '',
+    strip_tags($intro),
+    $zapLink ? "Abrir no WhatsApp: " . $zapLink : '', '',
     'Nome: ' . $d['nome'],
     $d['telefone'] ? 'WhatsApp: ' . $d['telefone'] : '',
     $d['email'] ? 'E-mail: ' . $d['email'] : '',
