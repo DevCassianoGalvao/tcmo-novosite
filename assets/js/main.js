@@ -18,7 +18,8 @@
   function sendLead(data) {
     data.pagina = location.href;
     try {
-      return fetch('/api/contato', {
+      var endpoint = /vercel\.app$/.test(location.hostname) ? '/api/contato' : '/api/contato.php';
+      return fetch(endpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data), keepalive: true
       }).then(function (r) { return r.ok; }).catch(function () { return false; });

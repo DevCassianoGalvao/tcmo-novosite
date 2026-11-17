@@ -1,0 +1,6 @@
+# Bloqueia arquivos sensíveis (.env, .git, README etc.)
+<FilesMatch "^\.|\.(md|example)$|^vercel\.json$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
+Options -Indexes

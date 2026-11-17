@@ -28,3 +28,9 @@ curl -X POST https://tcmo-novosite.vercel.app/api/contato \
   -d '{"tipo":"contato","nome":"Teste","telefone":"(11) 90000-0000","interesse":"Medicina","mensagem":"Teste de envio"}'
 ```
 Resposta esperada: `{"ok":true}` e o e-mail na caixa da clínica.
+
+## Servidor próprio (cPanel / Apache)
+
+Fora da Vercel o site usa `api/contato.php` (mesma lógica de `api/contato.js`). As variáveis ficam num arquivo `.env`
+na raiz do site ou uma pasta acima dela (fora do `public_html`, mais seguro). O `.htaccess` bloqueia o acesso público ao `.env`.
+O `.env` não vai para o Git (`.gitignore`); crie-o direto no servidor.
