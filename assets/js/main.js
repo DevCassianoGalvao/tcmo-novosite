@@ -116,7 +116,7 @@
           }, 220);
         };
         a2.onload = b2.onload = swap; a2.onerror = b2.onerror = swap;
-        a2.src = 'assets/ba/' + c + '-depois.webp?v=b2'; b2.src = 'assets/ba/' + c + '-antes.webp?v=b2';
+        a2.src = 'assets/ba/' + c + '-depois.webp?v=b3'; b2.src = 'assets/ba/' + c + '-antes.webp?v=b3';
       });
     });
   }
